@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #51a2e8;
+            padding: 20px;
+        }
+        label {
+            margin-right: 10px;
+        }
+        #result {
+            margin-top: 20px;
+        }
+        button{
+            background-color: #1d578b;
+            border-radius: 15px;
+            padding: 8px;
+            color: rgb(255, 255, 255);
+        }
+    </style>
+    <script>
+        function processInput() {
+            var numbers = [];
+            for (var i = 1; i <= 5; i++) {
+                var userInput = parseInt(document.getElementById("number" + i).value);
+                if (isNaN(userInput)) {
+                    alert("Please enter valid numbers.");
+                    return;
+                }
+                numbers.push(userInput);
+            }
+            var operation = document.getElementById("operation").value;
+            var result;
+            switch (operation) {
+                case "MAX":
+                    result = findMax(numbers);
+                    break;
+                case "MIN":
+                    result = findMin(numbers);
+                    break;
+                case "FIND":
+                    var target = parseInt(prompt("Enter the number to find:"));
+                    if (!isNaN(target)) {
+                        result = findPosition(numbers, target);
+                    } else {
+                        alert("Please enter a valid number to find.");
+                        return;
+                    }
+                    break;
+                default:
+                    alert("Invalid operation selected.");
+                    return;
+            }
+            displayResult(result);
+        }
+        function findMax(arr) {
+            return Math.max(...arr);
+        }
+        function findMin(arr) {
+            return Math.min(...arr);
+        }
+        function findPosition(arr, target) {
+            var position = arr.indexOf(target);
+            return position !== -1 ? position + 1 : "Not found";
+        }
+        function displayResult(result) {
+            alert("Result: " + result);
+        }
+    </script>
+</head>
+<body>
+    <h1>Number Operations</h1>
+    <label for="number1">Number 1:</label>
+    <input type="number" id="number1" required>
+    <br><br>
+    <label for="number2">Number 2:</label>
+    <input type="number" id="number2" required>
+    <br><br>
+    <label for="number3">Number 3:</label>
+    <input type="number" id="number3" required>
+    <br><br>
+    <label for="number4">Number 4:</label>
+    <input type="number" id="number4" required>
+    <br><br>
+    <label for="number5">Number 5:</label>
+    <input type="number" id="number5" required>
+    <br><br>
+    <label for="operation">Select an operation:</label>
+    <select id="operation">
+        <option value="MAX">MAX</option>
+        <option value="MIN">MIN</option>
+        <option value="FIND">FIND</option>
+    </select>
+    <br><br>
+    <button onclick="processInput()">Process</button>
+</body>
+</html>

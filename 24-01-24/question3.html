@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>question3</title>
+</head>
+<style>
+    button{
+        margin: 1%;
+        font-size: large;
+    }
+    p{
+        color:red;
+        font-size: x-large;
+    }
+</style>
+
+<body>
+    <h1>Question-3</h1>
+    <p id="paragraph"> Hello everyone! This is my Web Page</p>
+    <br>
+    <img src="pic.png" id="pic" alt="photo"><br>
+    <button id="change-font" onclick="fontStyleChange()">Change font style</button>
+    <button id="change-pic">Change Background picture</button>
+    <br>
+    <button id="change-color" onclick="fontColorChange()">Change font color</button><br>
+    <button id="change-size">Change font size</button>
+
+    <script>
+        var para;
+        document.onload = () => {
+            para = document.getElementById('paragraph');
+        };
+        function fontStyleChange(){
+            para.style.fontFamily = 'Times New Roman';
+            para.style.color = 'black';
+        }
+        function fontColorChange(){
+            console.log("meow");
+            para.style.color = 'blue';
+        }
+    </script>
+</body>
+</html>

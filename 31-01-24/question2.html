@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #afd7fa;
+            padding: 20px;
+        }
+
+        #result {
+            margin-top: 20px;
+        }
+        button{
+            background-color: #489ce6;
+            border-radius: 15px;
+            padding: 8px;
+            color: rgb(255, 255, 255);
+        }
+    </style>
+    <script>
+        function captureStudents() {
+            var numStudents = parseInt(prompt("Enter the number of students in the class:", 0));
+
+            if (isNaN(numStudents) || numStudents <= 0) {
+                alert("Please enter a valid number of students.");
+                return;
+            }
+
+            var studentNames = [];
+
+            for (var i = 0; i < numStudents; i++) {
+                var studentName = prompt("Enter the name of student " + (i + 1) + ":");
+                studentNames.push(studentName || ''); 
+            }
+            displayResults(studentNames);
+        }
+
+        function countVowels(name) {
+            var vowels = name.match(/[aeiouAEIOU]/g);
+            return vowels ? vowels.length : 0;
+        }
+
+        function displayResults(names) {
+            var resultContainer = document.getElementById("result");
+            resultContainer.innerHTML = "<h2>Results</h2>";
+
+            for (var i = 0; i < names.length; i++) {
+                var numVowels = countVowels(names[i]);
+                resultContainer.innerHTML += <p>${names[i]} has ${numVowels} vowel(s).</p>;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Student Vowel Counter</h1>
+    <button onclick="captureStudents()">Capture Students</button>
+    <div id="result"></div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #afd7fa;
+            padding: 20px;
+        }
+
+        #result {
+            margin-top: 20px;
+        }
+
+        button{
+            background-color: #489ce6;
+            border-radius: 15px;
+            padding: 8px;
+            color: rgb(255, 255, 255);
+        }
+        
+    </style>
+    <script>
+        
+        var keyValueArray = {
+            name: "John",
+            age: 25,
+            city: "New York",
+            isStudent: true,
+            grades: [85, 90, 78],
+            department: "Computer Science",
+            salary: 50000,
+            isMarried: false,
+            experience: 3,
+            skills: ["JavaScript", "HTML", "CSS"]
+        };
+
+        function countTypes() {
+            var numberCount = 0;
+            var stringCount = 0;
+
+            for (var key in keyValueArray) {
+                if (typeof keyValueArray[key] === 'number') {
+                    numberCount++;
+                } else if (typeof keyValueArray[key] === 'string') {
+                    stringCount++;
+                }
+            }
+
+            displayResult(numberCount, stringCount);
+        }
+
+        function displayResult(numberCount, stringCount) {
+            var resultContainer = document.getElementById("result");
+            resultContainer.innerHTML = "<h2>Result</h2>";
+            resultContainer.innerHTML += "<p>Number of 'number' values: " + numberCount + "</p>";
+            resultContainer.innerHTML += "<p>Number of 'string' values: " + stringCount + "</p>";
+        }
+    </script>
+</head>
+<body>
+    <h1>Key-Value Array Types Counter</h1>
+    <button onclick="countTypes()">Count Types</button>
+    <div id="result"></div>
+</body>
+</html>
