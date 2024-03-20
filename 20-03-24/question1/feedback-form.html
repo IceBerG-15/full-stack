@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feedback Form</title>
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
+</head>
+<body>
+
+<h2>Feedback Form</h2>
+
+<form id="feedbackForm">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name"><br><br>
+    
+    <label>Gender:</label><br>
+    <input type="radio" id="male" name="gender" value="male">
+    <label for="male">Male</label><br>
+    <input type="radio" id="female" name="gender" value="female">
+    <label for="female">Female</label><br><br>
+
+    <label for="comments">Comments:</label><br>
+    <textarea id="comments" name="comments" rows="4" cols="50"></textarea><br><br>
+    
+    <label for="subscribe">Subscribe to newsletter:</label>
+    <input type="checkbox" id="subscribe" name="subscribe"><br><br>
+    
+    <label for="rating">Rating (1-5):</label><br>
+    <input type="number" id="rating" name="rating" min="1" max="5"><br><br>
+
+    <button type="button" onclick="submitForm()">Submit</button>
+</form>
+
+<hr>
+
+<div id="feedbackTable"></div>
+
+<script>
+    function submitForm() {
+        var formData = {
+            name: document.getElementById("name").value,
+            gender: document.querySelector('input[name="gender"]:checked').value,
+            comments: document.getElementById("comments").value,
+            subscribe: document.getElementById("subscribe").checked ? "Yes" : "No",
+            rating: document.getElementById("rating").value
+        };
+
+        displayFeedback(formData);
+    }
+
+    function displayFeedback(data) {
+        var table = document.createElement("table");
+        var headers = ["Name", "Gender", "Comments", "Subscribe", "Rating"];
+        var tr = document.createElement("tr");
+
+        headers.forEach(function(header) {
+            var th = document.createElement("th");
+            th.textContent = header;
+            tr.appendChild(th);
+        });
+
+        table.appendChild(tr);
+
+        var values = Object.values(data);
+        var dataRow = document.createElement("tr");
+        values.forEach(function(value) {
+            var td = document.createElement("td");
+            td.textContent = value;
+            dataRow.appendChild(td);
+        });
+
+        table.appendChild(dataRow);
+
+        document.getElementById("feedbackTable").innerHTML = "";
+        document.getElementById("feedbackTable").appendChild(table);
+    }
+</script>
+
+</body>
+</html>

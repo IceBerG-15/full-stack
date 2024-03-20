@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="languageApp">
+<head>
+    <title>Programming Languages Description</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        .description {
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div ng-controller="LanguageController">
+        <h2>Select Programming Languages:</h2>
+        <div ng-repeat="language in languages">
+            <label>
+                <input type="checkbox" ng-model="language.selected" ng-change="updateDescription(language)">
+                {{ language.name }}
+            </label>
+        </div>
+
+        <div class="description">
+            <h3>Description:</h3>
+            <p>{{ selectedLanguageDescription }}</p>
+        </div>
+    </div>
+
+    <script>
+        angular.module('languageApp', [])
+            .controller('LanguageController', function ($scope) {
+                $scope.languages = [
+                    { name: 'JavaScript', description: 'JavaScript is a high-level, interpreted programming language.' },
+                    { name: 'Python', description: 'Python is an interpreted, high-level and general-purpose programming language.' },
+                    { name: 'Java', description: 'Java is a high-level, class-based, object-oriented programming language.' },
+                    { name: 'C++', description: 'C++ is a general-purpose programming language created as an extension of the C programming language.' },
+                    { name: 'C#', description: 'C# is a general-purpose, multi-paradigm programming language developed by Microsoft.' },
+                    { name: 'PHP', description: 'PHP is a popular general-purpose scripting language that is especially suited to web development.' }
+                ];
+
+                $scope.updateDescription = function (language) {
+                    if (language.selected) {
+                        $scope.selectedLanguageDescription = language.description;
+                    } else {
+                        $scope.selectedLanguageDescription = '';
+                    }
+                };
+            });
+    </script>
+</body>
+</html>

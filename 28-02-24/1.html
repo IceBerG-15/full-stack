@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ticket Registering Application</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .welcome {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+    .issue-input {
+      margin-bottom: 10px;
+    }
+    input[type="text"] {
+      font-family: Arial, sans-serif;
+      padding: 5px;
+      border: 1px solid #ccc;
+      transition: background-color 0.3s ease;
+    }
+    input[type="text"]:focus {
+      background-color: yellow;
+    }
+    input[type="text"]:not(:focus) {
+      background-color: lightblue;
+    }
+    #success-message {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      padding: 20px;
+      border: 1px solid #ccc;
+    }
+    @keyframes blink {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+    .blink {
+      animation: blink 1s infinite;
+    }
+  </style>
+</head>
+<body>
+  <div class="welcome" id="welcome"></div>
+  <form id="issue-form">
+    <div class="issue-input">
+      <label for="issue-details">Issue Details:</label>
+      <input type="text" id="issue-details" name="issue-details">
+    </div>
+    <div class="issue-input">
+      <label for="issue-date">Date of Occurrence:</label>
+      <input type="text" id="issue-date" name="issue-date">
+    </div>
+    <div class="issue-input">
+      <label for="issue-owner">Owner of the Issue:</label>
+      <input type="text" id="issue-owner" name="issue-owner">
+    </div>
+    <div class="issue-input">
+      <label for="issue-description">Brief Description:</label>
+      <input type="text" id="issue-description" name="issue-description">
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+  <div id="success-message"></div>
+
+  <script>
+    $(document).ready(function() {
+      // Authentication (dummy, for demonstration)
+      const authenticated = true; // Assuming user is already authenticated
+
+      if (authenticated) {
+        $('.welcome').text('Welcome, User123');
+      }
+
+      // Change background color of input boxes on focus/blur
+      $('input[type="text"]').on('focus', function() {
+        $(this).css('background-color', 'yellow');
+      }).on('blur', function() {
+        $(this).css('background-color', 'lightblue');
+      });
+
+      // Handle form submission
+      $('#issue-form').submit(function(event) {
+        event.preventDefault();
+
+        // Display success message
+        const timestamp = new Date().toLocaleString();
+        $('#success-message').html(`Issue submitted successfully.<br>Timestamp: <span class="blink">${timestamp}</span>`);
+        $('#success-message').show();
+
+        // Clear form fields after submission
+        $('#issue-form')[0].reset();
+
+        // Hide success message after 3 seconds
+        setTimeout(function() {
+          $('#success-message').hide();
+        }, 3000);
+      });
+    });
+  </script>
+</body>
+</html>

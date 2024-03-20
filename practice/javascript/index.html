@@ -5,10 +5,136 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<style>
+    h1{
+        text-shadow: 5px 5px lightcoral;
+    }
+    .child{
+        display: inline-block;
+    }
+    #order{
+        background-color: rgb(20, 135, 235);
+        width: 40%;
+        padding-left: 5%;
+        font-size: x-large;
+        font-family: 'Courier New', Courier, monospace;
+        box-shadow: 5px 10px rgb(190, 5, 165);
+    }
+    #order:hover #item-5{
+        display: block;
+    }
+    #order:hover {
+        background-color: rgb(36, 197, 11);
+        box-shadow: 5px 10px rgb(20, 135, 235);
+    }
+    #unorder{
+        background-color: rgb(20, 135, 235);
+        width: 40%;
+        margin-left: 5%;
+        padding-left: 5%;
+        font-size: x-large;
+        font-family: 'Courier New', Courier, monospace;
+        box-shadow: 5px 10px rgb(190, 5, 165);
+    }
+    #form{
+        margin-top: 5%;
+        background-color: rgb(20, 135, 235);
+        padding-left: 5%;
+        font-size: x-large;
+        font-family: 'Courier New', Courier, monospace;
+    }
+    #btn{
+        margin-top: 2%;
+        font-size: x-large;
+    }
+    @media screen and (max-width: 992px) {
+        body {
+            background-color: blue;
+            color: white;
+        }
+    }
+      /* On screens that are 600px wide or less, the background color is olive */
+    @media screen and (max-width: 600px) {
+        body {
+            background-color: olive;
+            color: white;
+        }
+    }
+</style>
 <body>
     <h1>This page is to learn about JavaScript.</h1>
-    <script src = "1.js">
+    <div id="parent">
+        <div id="order" class="child">
+            <ol id="order-list" type="1">
+                <li id="item-1">Item 1</li>
+                <li id="item-2">Item 2</li>
+                <li id="item-3">Item 3</li>
+                <li id="item-4">Item 4</li>
+                <li id="item-5">Item 5</li>
+            </ol>
+        </div>
+        <div id="unorder" class="child">
+            <ul id="unordered-list" style="list-style-type:square;">
+                <li id="item-1">Item 1</li>
+                <li id="item-2">Item 2</li>
+                <li id="item-3">Item 3</li>
+                <li id="item-4">Item 4</li>
+                <li id="item-5">Item 5</li>
+            </ul>
+        </div>
+    </div>
+    <form id="form" action="">
+        <label for="name">Name</label>
+        <input type="text" id="name" ><br>
+        <label for="email">Email</label>
+        <input type="email" id="email" ><br>
+        <label >Python</label>
+        <input type="checkbox" id="py" value="python" onclick="checkbox()"><br>
+        <label >Java</label>
+        <input type="checkbox" id="java" value="java" onclick="checkbox()"><br>
+        <input type="radio" id="r1" value="c++" name="radio" onclick="radio()">
+        <lable>c++</lable><br>
+        <input type="radio" id="r2" value="c#" name="radio" onclick="radio()">
+        <label>c#</label><br>
+        <button id="btn" type="submit" onclick="func()">Submit</button>
+    </form>
+    <div id="text">
         
+    </div>
+    <script>
+        const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
+        function func() {
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var radio = document.getElementById('radio').value;
+            var check = document.getElementById('py');
+            if(regex.test(email)){
+                alert("it is the valid email.");
+            }
+            else{
+                alert("it is not the valid email.");
+            }
+        }
+        function checkbox(){
+            var check = document.getElementById('py');
+            var c = check.value;
+            if(check.checked){
+                alert("Python is selected."+c);
+            }
+            else{
+                alert("Python is not selected."+c);
+            }
+        }
+        function radio(){
+            var radio = document.getElementById('r1');
+            var r = radio.value;
+            if(radio.checked){
+                alert(r+ "c++ is selected.");
+            }
+            else{
+                alert(r+ "c++ is not selected.");
+            }
+        }
     </script>
 </body>
 </html>

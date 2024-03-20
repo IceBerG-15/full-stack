@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="movieApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie List</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f3f3f3;
+        }
+        .container {
+            text-align: center;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .button {
+            background-color: #113213;
+            border: none;
+            color: white;
+            padding: 10px 24px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body ng-controller="MovieController">
+    <div class="container">
+        <h1>Movie List</h1>
+        <button ng-click="sortByYear()" class="button">Display by Year</button>
+        <ul>
+            <li ng-repeat="movie in movies">
+                {{ movie.title }} ({{ movie.year }}) - Starring: {{ movie.actor }}/{{ movie.actress }} - Directed by: {{ movie.director }}
+            </li>
+        </ul>
+    </div>
+    <script >
+        angular.module('movieApp', [])
+            .controller('MovieController', function($scope) {
+                $scope.movies = [
+                    { title: 'Kung Fu Panda', year: 2000, actor: 'Poo', actress: 'Tigress', director: 'Mehul' },
+                    { title: 'Godzilla x Kong', year: 1995, actor: 'Godzilla', actress: 'Kong', director: 'Jay' },
+                    { title: 'How To Train Dragon', year: 2010, actor: 'Toothless', actress: 'White', director: 'Rohit' },
+                ];
+
+                $scope.sortByYear = function() {
+                    $scope.movies.sort(function(a, b) {
+                        return a.year - b.year;
+                });
+            };
+});
+</script>
+</body>
+</html>

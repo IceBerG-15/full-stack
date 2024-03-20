@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="movieApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie List</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        /* CSS styles remain unchanged */
+    </style>
+</head>
+<body ng-controller="MovieController">
+    <div class="container">
+        <h1>Movie List</h1>
+        
+        <!-- Dropdown to select director -->
+        <select ng-model="selectedDirector">
+            <option value="">Select Director</option>
+            <option ng-repeat="(director, movies) in directorMovies" value="{{ director }}">{{ director }}</option>
+        </select>
+
+        <!-- Button to display movies of selected director -->
+        <button ng-click="displayMoviesByDirector()" class="button">Display Movies of Director</button>
+        
+        <!-- Textbox to capture year input -->
+        <input type="text" placeholder="Enter Year" ng-model="inputYear">
+        <button ng-click="displayMoviesByYear()" class="button">Display Movies by Year</button>
+
+        <ul>
+            <li ng-repeat="movie in displayedMovies">
+                {{ movie.title }} ({{ movie.year }}) - Starring: {{ movie.actor }}/{{ movie.actress }} - Directed by: {{ movie.director }}
+            </li>
+        </ul>
+    </div>
+    <script>
+        angular.module('movieApp', [])
+            .controller('MovieController', function($scope) {
+                $scope.movies = [
+                    { title: 'Kung Fu Panda', year: 2000, actor: 'Poo', actress: 'Tigress', director: 'Mehul' },
+                    { title: 'Godzilla x Kong', year: 1995, actor: 'Godzilla', actress: 'Kong', director: 'Jay' },
+                    { title: 'How To Train Dragon', year: 2010, actor: 'Toothless', actress: 'White', director: 'Rohit' },
+                ];
+
+                // Function to create directorMovies array
+                $scope.createDirectorMoviesArray = function() {
+                    $scope.directorMovies = {};
+                    $scope.movies.forEach(function(movie) {
+                        if (!$scope.directorMovies[movie.director]) {
+                            $scope.directorMovies[movie.director] = [];
+                        }
+                        $scope.directorMovies[movie.director].push({ title: movie.title, year: movie.year });
+                    });
+                };
+
+                // Function to display movies by selected director
+                $scope.displayMoviesByDirector = function() {
+                    $scope.displayedMovies = $scope.directorMovies[$scope.selectedDirector] || [];
+                    // Sort movies by year in descending order
+                    $scope.displayedMovies.sort(function(a, b) {
+                        return b.year - a.year;
+                    });
+                };
+
+                // Function to display movies by selected year
+                $scope.displayMoviesByYear = function() {
+                    if (!$scope.inputYear || isNaN($scope.inputYear)) {
+                        alert("Please enter a valid year.");
+                        return;
+                    }
+                    $scope.displayedMovies = $scope.movies.filter(function(movie) {
+                        return movie.year == $scope.inputYear;
+                    });
+                };
+
+                // Initialize directorMovies array
+                $scope.createDirectorMoviesArray();
+
+                // Initialize displayedMovies array
+                $scope.displayedMovies = [];
+            });
+    </script>
+</body>
+</html>
